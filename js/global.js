@@ -5,43 +5,54 @@ var start = document.getElementById('start')
 var reset = document.getElementById('reset')
 var display = document.getElementById('display')  //<--^^grabbing my html elements
 var timer
-var  newTime
 
-function increaseCounter() {
+function increaseCounter() {  //<---starts the timer
     counter++
     console.log(counter)
     display.innerHTML = counter
 }
 
-function pauseCounter() {
-   //clearInterval(increaseCounter, 0)
+function startInterval() {    //<--starts the timer found in increaseCounter
+   clearInterval(startTimer)
+   //clearTimeout(startTimer)
+   timer = setInterval(increaseCounter, 1000)
+   //console.log(startTimer)
+}
+
+function pauseInterval() {
+   clearInterval(startTimer)
+   reset = setTimeout(resetTimer, 1000)
+   //console.log(startTimer)
 }
 
 document.getElementById('start').addEventListener('click', function(){
-   //clearInterval(timer)
+   //clearInterval(pauseCounter)
    if (this.innerHTML === 'Pause') {
-      //start()
       this.innerHTML = 'Continue'
-      //setInterval(pauseCounter)
-      //setInterval(increaseCounter, 1000)
    }
    else {
       this.innerHTML = 'Pause'
-      counter++
+      //counter++
       console.log(counter)
       setInterval(increaseCounter, 1000)
    }
 })
+
+// function resetInterval() {
+//    clearInterval(startTimer)
+//    counter = 0
+//    display.innerHTML = counter
+// }
+
 document.getElementById('reset').addEventListener('click', function(){
-
-      clearInterval(counter)
-
+      //clearInterval(pauseCounter)
       if (this.innerHTML === 'Reset') {
          start.innerHTML = 'Start'
-         clearInterval(increaseCounter)
+         setInterval(resetInterval)
       }
       else {
          this.innerHTML = 'Reset'
+         clearInterval(startInterval)
       }
 
 })
